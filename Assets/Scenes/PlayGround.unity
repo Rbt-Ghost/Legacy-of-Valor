@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 267983644}
   - component: {fileID: 267983643}
   - component: {fileID: 267983645}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +608,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -682,7 +682,7 @@ MonoBehaviour:
   myRigidBody: {fileID: 2139319837}
   myAnimator: {fileID: 2139319834}
   speed: 5
-  jumpForce: 10
+  jumpForce: 12
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

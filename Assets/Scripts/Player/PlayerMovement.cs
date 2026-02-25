@@ -11,12 +11,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int jumpForce = 7;
 
     private Vector2 movement;
+    private float playerHalfHeight;
     private bool isGrounded;
+
+    private void Start()
+    {
+        playerHalfHeight = mySpriteRenderer.bounds.extents.y /2;
+    }
 
     void Update()
     {
+        isGrounded = CheckGrounded();
         MovementHandler();
         UpdateAnimmationState();
+
+        // DEbug only
+        //Vector2 origin = (Vector2)transform.position + Vector2.down * (playerHalfHeight - 0.02f);
+        //Debug.DrawRay(origin, Vector2.down * 0.1f, Color.red);
     }
 
     private void FixedUpdate()
@@ -89,13 +100,11 @@ public class PlayerMovement : MonoBehaviour
         myRigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private bool CheckGrounded()
     {
-        isGrounded = true;
-    }
+        Vector2 origin = (Vector2)transform.position + Vector2.down * (playerHalfHeight - 0.02f);
+        float rayDistance = 0.1f;
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isGrounded = false;
+        return Physics2D.Raycast(origin, Vector2.down, rayDistance, LayerMask.GetMask("Ground"));
     }
 }
