@@ -13,6 +13,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        MovementHandler();
+        SpriteFlipX();
+    }
+
+    private void FixedUpdate()
+    {
+        myRigidBody.linearVelocity = movement;
+    }
+
+    /// <summary>
+    /// 
+    /// Handle the player input for character movement
+    /// 
+    /// </summary>
+    private void MovementHandler()
+    {
         var keyboard = Keyboard.current;
 
         movement = Vector2.zero;
@@ -28,15 +44,18 @@ public class PlayerMovement : MonoBehaviour
             movement += Vector2.right * speed;
             mySpriteRenderer.flipX = false;
         }
+    }
 
+    /// <summary>
+    /// 
+    /// Automaticaly flip the SpriteRenderer on the Y axis
+    /// 
+    /// </summary>
+    private void SpriteFlipX()
+    {
         if (movement == Vector2.zero)
             myAnimator.SetBool("isRunning", false);
         else
             myAnimator.SetBool("isRunning", true);
-    }
-
-    private void FixedUpdate()
-    {
-        myRigidBody.linearVelocity = movement;
     }
 }
