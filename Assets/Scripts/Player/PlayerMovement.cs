@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public SpriteRenderer mySpriteRenderer;
-    public Rigidbody2D myRigidBody;
-    public Animator myAnimator;
-    public int speed = 5;
+    [SerializeField] private SpriteRenderer mySpriteRenderer;
+    [SerializeField] private Rigidbody2D myRigidBody;
+    [SerializeField] private Animator myAnimator;
+    [SerializeField] private int speed = 5;
 
     private Vector2 movement;
 
