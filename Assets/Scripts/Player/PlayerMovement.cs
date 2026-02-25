@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public SpriteRenderer mySpriteRenderer;
     public Rigidbody2D myRigidBody;
+    public Animator myAnimator;
     public int speed = 5;
-    public Animator animator;
 
     private Vector2 movement;
 
@@ -19,17 +20,19 @@ public class PlayerMovement : MonoBehaviour
         if (keyboard.aKey.isPressed)
         {
             movement = Vector2.left * speed;
+            mySpriteRenderer.flipX = true;
         }
 
         if (keyboard.dKey.isPressed)
         {
-           movement += Vector2.right * speed;
+            movement += Vector2.right * speed;
+            mySpriteRenderer.flipX = false;
         }
 
         if (movement == Vector2.zero)
-            animator.SetBool("isRunning", false);
+            myAnimator.SetBool("isRunning", false);
         else
-            animator.SetBool("isRunning", true);
+            myAnimator.SetBool("isRunning", true);
     }
 
     private void FixedUpdate()

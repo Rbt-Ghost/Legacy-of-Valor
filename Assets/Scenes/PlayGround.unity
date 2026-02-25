@@ -678,9 +678,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176c050b14e32174d903030c634abc2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  mySpriteRenderer: {fileID: 2139319835}
   myRigidBody: {fileID: 2139319837}
+  myAnimator: {fileID: 2139319834}
   speed: 5
-  animator: {fileID: 2139319834}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
