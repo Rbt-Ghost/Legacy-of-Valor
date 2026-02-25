@@ -680,6 +680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   myRigidBody: {fileID: 2139319837}
   speed: 5
+  animator: {fileID: 2139319834}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

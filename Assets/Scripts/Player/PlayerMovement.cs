@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D myRigidBody;
     public int speed = 5;
+    public Animator animator;
+
     private Vector2 movement;
 
     void Update()
@@ -23,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
         {
            movement += Vector2.right * speed;
         }
+
+        if (movement == Vector2.zero)
+            animator.SetBool("isRunning", false);
+        else
+            animator.SetBool("isRunning", true);
     }
 
     private void FixedUpdate()
