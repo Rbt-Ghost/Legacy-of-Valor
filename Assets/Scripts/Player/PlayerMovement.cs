@@ -5,33 +5,28 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D myRigidBody;
-    public int velocity = 1;
+    public int speed = 5;
+    private Vector2 movement;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-     
-    }
-
-    // Update is called once per frame
     void Update()
     {
         var keyboard = Keyboard.current;
 
-        if (keyboard.wKey.wasPressedThisFrame)
+        movement = Vector2.zero;
+
+        if (keyboard.aKey.isPressed)
         {
-            myRigidBody.linearVelocity = Vector2.up * velocity;
+            movement = Vector2.left * speed;
         }
 
-        if (keyboard.aKey.wasPressedThisFrame)
+        if (keyboard.dKey.isPressed)
         {
-            myRigidBody.linearVelocity = Vector2.left * velocity;
+           movement += Vector2.right * speed;
         }
+    }
 
-        if (keyboard.dKey.wasPressedThisFrame)
-        {
-            myRigidBody.linearVelocity = Vector2.right * velocity;
-        }
-
+    private void FixedUpdate()
+    {
+        myRigidBody.linearVelocity = movement;
     }
 }
