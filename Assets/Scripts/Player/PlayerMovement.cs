@@ -8,18 +8,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D myRigidBody;
     [SerializeField] private Animator myAnimator;
     [SerializeField] private int speed = 5;
+    [SerializeField] private int jumpForce = 7;
 
     private Vector2 movement;
+    private bool isGrounded;
 
     void Update()
     {
         MovementHandler();
-        SpriteFlipX();
+        UpdateAnimmationState();
     }
 
     private void FixedUpdate()
     {
-        myRigidBody.linearVelocity = movement;
+        myRigidBody.linearVelocity = new Vector2(
+            movement.x,
+            myRigidBody.linearVelocity.y
+        );
     }
 
     /// <summary>
@@ -44,18 +49,53 @@ public class PlayerMovement : MonoBehaviour
             movement += Vector2.right * speed;
             mySpriteRenderer.flipX = false;
         }
+
+        if (keyboard.wKey.wasPressedThisFrame && isGrounded)
+        {
+            Jump();
+            myAnimator.SetBool("isJumping", true);
+        }
     }
 
     /// <summary>
     /// 
-    /// Automaticaly flip the SpriteRenderer on the Y axis
+    /// This function handles the aniation state of the player character based on the input
     /// 
     /// </summary>
-    private void SpriteFlipX()
+    private void UpdateAnimmationState()
     {
-        if (movement == Vector2.zero)
+        if (!isGrounded)
+        {
             myAnimator.SetBool("isRunning", false);
-        else
+            myAnimator.SetBool("isJumping", true);
+            return;
+        }
+
+        myAnimator.SetBool("isJumping", false);
+
+        if (movement.x != 0)
             myAnimator.SetBool("isRunning", true);
+        else
+            myAnimator.SetBool("isRunning", false);
+    }
+
+    /// <summary>
+    /// 
+    /// Apply an impulse ( (0,X), x >= 1)  to the player's RigidBody2D
+    /// 
+    /// </summary>
+    private void Jump()
+    {
+        myRigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isGrounded = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isGrounded = false;
     }
 }
