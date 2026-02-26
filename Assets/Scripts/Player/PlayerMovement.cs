@@ -100,6 +100,20 @@ public class PlayerMovement : MonoBehaviour
         myRigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+
+    /// <summary>
+    /// 
+    /// Checks if the player is currently touching the ground.
+    /// It casts a short ray downwards from an offset near the bottom of the player's bounds
+    /// to ensure detection only occurs at the feet.
+    /// 
+    /// </summary>
+    /// <returns>
+    /// 
+    /// True if the ray hits a collider on the "Ground" layer within the specified distance; 
+    /// otherwise, false.
+    /// 
+    /// </returns>
     private bool CheckGrounded()
     {
         Vector2 origin = (Vector2)transform.position + Vector2.down * (playerHalfHeight - 0.02f);
