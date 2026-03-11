@@ -49,6 +49,16 @@ public class PlayerMovement : MonoBehaviour
 
         movement = Vector2.zero;
 
+        if (keyboard.kKey.isPressed && isGrounded)
+        {
+            myAnimator.SetBool("isDefending", true);
+            return;
+        }
+        else
+        {
+            myAnimator.SetBool("isDefending", false);
+        }
+
         if (keyboard.aKey.isPressed)
         {
             movement = Vector2.left * speed;
@@ -75,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void UpdateAnimmationState()
     {
+
         if (!isGrounded)
         {
             myAnimator.SetBool("isRunning", false);
