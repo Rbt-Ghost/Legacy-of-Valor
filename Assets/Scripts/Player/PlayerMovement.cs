@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement;
     private float playerHalfHeight;
     private bool isGrounded;
+    private bool isDefending;
 
     private void Start()
     {
@@ -31,6 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDefending)
+        {
+            myRigidBody.linearVelocity = new Vector2(0, myRigidBody.linearVelocity.y);
+            return;
+        }
+
         myRigidBody.linearVelocity = new Vector2(
             movement.x,
             myRigidBody.linearVelocity.y
@@ -48,6 +55,19 @@ public class PlayerMovement : MonoBehaviour
 
         movement = Vector2.zero;
 
+        // DEFEND
+        if (keyboard.kKey.isPressed && isGrounded)
+        {
+            isDefending = true;
+            playerMovementState.SetMovementState(PlayerMovementState.MovementState.Defending);
+            return;
+        }
+        else if (isDefending) // K was released
+        {
+            isDefending = false;
+            playerMovementState.SetMovementState(PlayerMovementState.MovementState.Idle);
+        }
+
         if (keyboard.aKey.isPressed)
         {
             movement = Vector2.left * speed;
@@ -64,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-
     }
 
     /// <summary>

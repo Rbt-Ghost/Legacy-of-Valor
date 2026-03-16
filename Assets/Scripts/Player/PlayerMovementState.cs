@@ -26,17 +26,17 @@ public class PlayerMovementState : MonoBehaviour
 
     private void Update()
     {
-        // If player is in the air
+        if (CurrentMoveState == MovementState.Defending)
+            return;
+
         if (Mathf.Abs(myRigidBody.linearVelocity.y) > 0.1f)
         {
             SetMovementState(MovementState.Jumping);
         }
-        // If player is moving on ground
         else if (Mathf.Abs(myRigidBody.linearVelocity.x) > 0.1f)
         {
             SetMovementState(MovementState.Running);
         }
-        // Otherwise idle
         else
         {
             SetMovementState(MovementState.Idle);
