@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 2139319837}
   - component: {fileID: 2139319838}
   - component: {fileID: 2139319839}
+  - component: {fileID: 2139319840}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -682,9 +683,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   mySpriteRenderer: {fileID: 2139319835}
   myRigidBody: {fileID: 2139319837}
-  myAnimator: {fileID: 2139319834}
   speed: 5
   jumpForce: 12
+  playerMovementState: {fileID: 2139319840}
+--- !u!114 &2139319840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139319833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe37880bd7f6d049a546d269852e6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementState
+  animator: {fileID: 2139319834}
+  myRigidBody: {fileID: 2139319837}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

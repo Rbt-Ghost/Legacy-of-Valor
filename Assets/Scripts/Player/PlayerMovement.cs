@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer mySpriteRenderer;
     [SerializeField] private Rigidbody2D myRigidBody;
-    [SerializeField] private Animator myAnimator;
     [SerializeField] private int speed = 5;
     [SerializeField] private int jumpForce = 7;
+    [SerializeField] private PlayerMovementState playerMovementState;
 
     private Vector2 movement;
     private float playerHalfHeight;
@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = CheckGrounded();
         MovementHandler();
-        UpdateAnimmationState();
 
         // DEbug only
         //Vector2 origin = (Vector2)transform.position + Vector2.down * (playerHalfHeight - 0.02f);
@@ -49,16 +48,6 @@ public class PlayerMovement : MonoBehaviour
 
         movement = Vector2.zero;
 
-        if (keyboard.kKey.isPressed && isGrounded)
-        {
-            myAnimator.SetBool("isDefending", true);
-            return;
-        }
-        else
-        {
-            myAnimator.SetBool("isDefending", false);
-        }
-
         if (keyboard.aKey.isPressed)
         {
             movement = Vector2.left * speed;
@@ -74,31 +63,8 @@ public class PlayerMovement : MonoBehaviour
         if (keyboard.wKey.wasPressedThisFrame && isGrounded)
         {
             Jump();
-            myAnimator.SetBool("isJumping", true);
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// This function handles the aniation state of the player character based on the input
-    /// 
-    /// </summary>
-    private void UpdateAnimmationState()
-    {
-
-        if (!isGrounded)
-        {
-            myAnimator.SetBool("isRunning", false);
-            myAnimator.SetBool("isJumping", true);
-            return;
         }
 
-        myAnimator.SetBool("isJumping", false);
-
-        if (movement.x != 0)
-            myAnimator.SetBool("isRunning", true);
-        else
-            myAnimator.SetBool("isRunning", false);
     }
 
     /// <summary>
